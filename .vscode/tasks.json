@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build (MSYS2 GLFW + GLAD)",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++17",
+
+        "src/main.cpp",
+        "src/app/app.cpp",
+        "src/physics/orbital.cpp",
+        "src/physics/atom.cpp",
+        "src/renderer/renderer.cpp",
+        "src/external/glad/src/glad.c",
+
+        "-IC:/msys64/ucrt64/include",
+        "-Isrc/external/include",
+
+        "-LC:/msys64/ucrt64/lib",
+
+        "-o", "QuantumAtom.exe",
+        "-O2",
+
+        "-lglfw3",
+        "-lopengl32",
+        "-lgdi32"
+      ],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}

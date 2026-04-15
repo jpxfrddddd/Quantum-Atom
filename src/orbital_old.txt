@@ -1,0 +1,21 @@
+float lithium_1s(float x, float y, float z){ // 1s orbital for lithium
+    float r = sqrt(x*x + y*y + z*z);
+
+    float a0 = 0.5f;
+    return exp(-r/a0);
+}
+float lithium_2s(float x, float y, float z){ // 2s orbital for lithium
+    float r = sqrt(x*x + y*y + z*z);
+
+    float a0 = 1.5f;
+    return (2.0f - r/a0) * exp(-r/(2.0f*a0));
+}
+float density(float x, float y, float z){
+    float psi_1s = lithium_1s(x, y, z);
+    float psi_2s = lithium_2s(x, y, z);
+
+    float rho_1s = psi_1s * psi_1s;
+    float rho_2s = psi_2s * psi_2s;
+    
+    return 2.0f * rho_1s + 1.0f *rho_2s; // 2 electrons in 1s, 1 electron in 2s
+}

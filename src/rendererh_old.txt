@@ -1,0 +1,5 @@
+#pragma once
+
+float lithium_1s(float x, float y, float z);
+float lithium_2s(float x, float y, float z);
+float density(float x, float y, float z);

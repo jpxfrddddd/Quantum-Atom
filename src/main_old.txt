@@ -1,0 +1,44 @@
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include "core/grid.h"
+#include "renderer/renderer.h"
+#include "physics/orbital.h"
+#include <iostream>
+
+float grid[N][N][N];
+
+
+int main(){
+    if(!glfwInit()){
+        std::cout << "Window error\n";
+        return -1;
+    }
+
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Quantum Atom", NULL, NULL);
+    if(!window){
+        std::cout << "Window error\n";
+        glfwTerminate();
+        return -1;
+    }
+
+    glfwMakeContextCurrent(window);
+    if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
+        std::cout << "Failed to initialize GLAD\n";
+        return -1;
+    }
+
+    while(!glfwWindowShouldClose(window)){
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        render(grid);
+        
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+
+  //  initOpenGL();
+  //  computeGrid(grid);
+    glfwTerminate();
+    return 0;
+}
