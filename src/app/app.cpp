@@ -1,7 +1,9 @@
 #include "app.h"
 #include "../physics/atom.h"
 
-//App::App(Atom atom) : currentAtom(atom) {}
+//extern Camera cam;
+
+void keyCallback(){}
 
 void App::init(){
     currentAtom = Magnesium();
@@ -10,5 +12,7 @@ void App::init(){
 void App::update(){}
 
 void App::render(){
-    renderer.render(currentAtom);
+    renderer.render(currentAtom, cam);
 }
+
+App* appPtr;
