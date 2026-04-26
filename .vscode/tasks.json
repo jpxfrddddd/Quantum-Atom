@@ -12,6 +12,7 @@
         "src/app/app.cpp",
         "src/physics/orbital.cpp",
         "src/physics/atom.cpp",
+        "src/physics/orb.cpp",
         "src/renderer/renderer.cpp",
         "src/renderer/camera.cpp",
         "src/external/glad/src/glad.c",
@@ -22,11 +23,12 @@
         "-LC:/msys64/ucrt64/lib",
 
         "-o", "QuantumAtom.exe",
-        "-O2",
+        "-mwindows",
 
-        "-lglfw3",
+        "-lglfw3", 
         "-lopengl32",
-        "-lgdi32"
+        "-lgdi32",
+        "-lwinmm"
       ],
       "group": { "kind": "build", "isDefault": true },
       "problemMatcher": ["$gcc"]

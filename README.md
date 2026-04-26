@@ -2,7 +2,7 @@
 
 Visualization of atomic orbitals based on solutions of the Schrödinger equation. This project render a 3D point cloud where the density of points represents the probability of finding an electron around a nucleus.
 
-![Render](images/magnesium.png)
+![Render](images/magnesium_2p_z.png)
 
 ## Overview
 
@@ -10,10 +10,27 @@ The program uses analytical solutions of the Schrödinger equuation for hydrogen
 
 ## Features
 
--3D visualization of electron probability density. You can use zqsd, wasd or arrows to move. Left ctrl will increase your speed, space will get you up and left shift will get you down.  
--Point cloud rendering  
--Basic camera movement  
--Different orbitals (depending on implementation)  
+3D visualization of electron probability density, basic controls
+
+Point cloud rendering    
+
+Basic camera movement    
+
+Different orbitals (depending on implementation)    
+
+## Controls
+
+![Render](images/electronShell.png)
+
+Pressing 1 will display 1s.
+
+Pressing 2 will display 2s. Once 2s is diplayed, pressing p will display 2p and once 2p is displayed, pressing x,z or y will display the following subshells. It applies to 3s and 3p.
+
+If 3s or 3p is displayed, use the left arrow in order to display 3d subshells (when they will be implemented).
+
+You can only move forward or back with the arrows, and move up or down with the space bar or left shift.
+
+Note that the currently displayed is chlorine due to his large amount of electron shells.
 
 ## How it works
 
@@ -62,22 +79,34 @@ This quantity is what is visualized in the program
 ### Visualization Method
 
 To represent this probability density:  
-    -Points are randomly generated in 3d space  
-    -The probability density $P$ is evalued at each point  
-    -Points are accepted with a probability proportional to $P$  
-    -The resulting point approximates the electron distribution  
+
+    Points are randomly generated in 3d space  
+
+    The probability density $P$ is evalued at each point  
+
+    Points are accepted with a probability proportional to $P$  
+
+    The resulting point approximates the electron distribution  
 
 ## Limitations
 
--Simplified model (hydrogen-like atoms)  
--Electron interactions are not included  
--No advanced optimization  
--Basic rendering pipeline  
+Simplified model (hydrogen-like atoms) 
+
+Electron interactions are not included  
+
+No advanced optimization  
+
+Basic rendering pipeline  
+
 
 ## Future improvements
 
--Better rendering (shaders, lighting)  
--Interactive atom & orbital selection  
--Performance improvements  
--Camera fix  
--GUI controls  
+Better rendering (shaders, lighting)  
+
+Interactive atom & orbital selection  
+
+Performance improvements  
+
+Better camera
+
+GUI controls  

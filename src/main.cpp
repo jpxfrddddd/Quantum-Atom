@@ -8,11 +8,17 @@
 #include "physics/atom.h"
 #include <cstring>
 #include "renderer/camera.h"
-
-
+#include "physics/orb.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
+
+bool displayed1s = true;
+bool displayed2s = false;
+bool displayed2p = false;
+bool displayed3s = false;
+bool displayed3p = false;
+bool displayed3d = false;
 
 Camera cam(0.0f, 0.0f, 60.0f);
 bool keys[1024] = {false};
@@ -62,6 +68,7 @@ void mouseCallback(GLFWwindow *w, double xpos, double ypos){
     if(appPtr->cam.pitch < -89.0f){
         appPtr->cam.pitch = -89.0f;
     }
+    
 } 
 
 int main(){
@@ -96,13 +103,16 @@ int main(){
         return -1;
     }
 
-    Atom currentAtom = Magnesium();
-    App app(currentAtom, cam);
+    Atom currentAtom = Chlorine();
+    orbitalGroup currentOrbital = Orbital_1s();
+    App app(currentAtom, cam, currentOrbital);
     appPtr = &app;
     //glfwSetWindowUserPointer(window, &app);
     app.init();
-    app.renderer.render(currentAtom, app.cam);
-    app.renderer.generateCloud(currentAtom);
+    //app.renderer.render(currentAtom, app.cam);
+    //app.renderer.generateCloud(currentAtom);
+    app.renderer.renderOrbital(currentOrbital, app.cam);
+    app.renderer.generateOrbital(currentOrbital);
 
     double lastTime = glfwGetTime();
     double x, y;
@@ -110,7 +120,7 @@ int main(){
     app.cam.lastX = x;
     app.cam.lastY = y;
     app.cam.z = 50.0f;
-    
+
     while(!glfwWindowShouldClose(window)){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
@@ -130,7 +140,7 @@ int main(){
 
         cam.getForward(fx, fy, fz);
         cam.getRight(rx, ry, rz);
-        if(keys[GLFW_KEY_Z] || keys[GLFW_KEY_W] || keys[GLFW_KEY_UP]){
+        /*if(keys[GLFW_KEY_Z] || keys[GLFW_KEY_W] || keys[GLFW_KEY_UP]){
             app.cam.x -= fx*speed;
             app.cam.z -= fz*speed;
         }
@@ -145,19 +155,145 @@ int main(){
         }
         if(keys[GLFW_KEY_D] || keys[GLFW_KEY_RIGHT]){
             app.cam.x += rx*speed;
-            app.cam.z += rz*speed;
-        }
+            app.cam.z += rz*speed; 
+        } */
+
+
+        //movement
+
         if(keys[GLFW_KEY_SPACE]){
             app.cam.y += speed;
         }
         if(keys[GLFW_KEY_LEFT_SHIFT]){
             app.cam.y -= speed;
         }
-        if(keys[GLFW_MOUSE_BUTTON_LEFT]){
-            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        if(keys[GLFW_KEY_ESCAPE]){
+            glfwTerminate();
         } 
-        if(keys[GLFW_MOUSE_BUTTON_RIGHT]){
-            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+        if(keys[GLFW_KEY_UP]){
+            app.cam.x -= fx*speed;
+            app.cam.z -= fz*speed;
+        }
+
+        if(keys[GLFW_KEY_DOWN]){
+            app.cam.x += fx*speed;
+            app.cam.z += fz*speed;
+        }
+
+        //Orbital switching
+
+        if(!displayed1s && keys[GLFW_KEY_1]){
+            currentOrbital = Orbital_1s();
+            app.renderer.generateOrbital(currentOrbital);
+            keys[GLFW_KEY_1] = false;
+            displayed1s = true;
+            displayed2s = false;
+            displayed2p = false;
+            displayed3s = false;
+            displayed3p = false;
+            
+        }
+
+
+        if(keys[GLFW_KEY_2]){
+            currentOrbital = Orbital_2s();
+            app.renderer.generateOrbital(currentOrbital);
+            keys[GLFW_KEY_2] = false;
+            displayed2s = true;
+        }
+        if(displayed2s){
+            displayed1s = false;
+            displayed2p = false;
+            displayed3s = false;
+            displayed3p = false;
+
+            if(keys[GLFW_KEY_P]){
+                currentOrbital = Orbital_2p();
+                app.renderer.generateOrbital(currentOrbital);
+                keys[GLFW_KEY_P] = false;
+                displayed2p = true;
+            }
+        }
+        if(displayed2p){
+            displayed1s = false;
+            displayed2s = false;
+            displayed3s = false;
+            displayed3p = false;
+
+            if(keys[GLFW_KEY_X]){
+                currentOrbital = Orbital_2p_x();
+                app.renderer.generateOrbital(currentOrbital);
+                keys[GLFW_KEY_X] = false;
+            }
+            if(keys[GLFW_KEY_Z] || keys[GLFW_KEY_W]){
+                currentOrbital = Orbital_2p_z();
+                app.renderer.generateOrbital(currentOrbital);
+                keys[GLFW_KEY_Z] = false;
+                keys[GLFW_KEY_W] = false;
+            }
+            if(keys[GLFW_KEY_Y]){
+                currentOrbital = Orbital_2p_y();
+                app.renderer.generateOrbital(currentOrbital);
+                keys[GLFW_KEY_Y] = false;
+            }
+            if(keys[GLFW_KEY_S]){
+                currentOrbital = Orbital_2s();
+                app.renderer.generateOrbital(currentOrbital);
+                keys[GLFW_KEY_S] = false;
+                displayed2s = true;
+                displayed2p = false;
+            }
+            else if(keys[GLFW_KEY_P]){
+                currentOrbital = Orbital_2p();
+                app.renderer.generateOrbital(currentOrbital);
+                keys[GLFW_KEY_P] = false;
+                displayed2p = true;
+                displayed2s = false;
+            }
+
+        }
+
+
+        if(!displayed3s && keys[GLFW_KEY_3]){
+            currentOrbital = Orbital_3s();
+            app.renderer.generateOrbital(currentOrbital);
+            keys[GLFW_KEY_3] = false;
+            displayed3p = false;
+            displayed3s = true;
+            displayed2s = false;
+            displayed1s = false;
+        }
+        if(displayed3s && keys[GLFW_KEY_P]){
+            currentOrbital = Orbital_3p();
+            app.renderer.generateOrbital(currentOrbital);
+            keys[GLFW_KEY_P] = false;
+            displayed3p = true;
+        }
+        if(displayed3p){
+            if(keys[GLFW_KEY_X]){
+                currentOrbital = Orbital_3p_x();
+                app.renderer.generateOrbital(currentOrbital);
+                keys[GLFW_KEY_X] = false;
+            }
+            if(keys[GLFW_KEY_Z] || keys[GLFW_KEY_W]){
+                currentOrbital = Orbital_3p_z();
+                app.renderer.generateOrbital(currentOrbital);
+                keys[GLFW_KEY_Z] = false;
+                keys[GLFW_KEY_W] = false;
+            }
+            if(keys[GLFW_KEY_Y]){
+                currentOrbital = Orbital_3p_y();
+                app.renderer.generateOrbital(currentOrbital);
+                keys[GLFW_KEY_Y] = false;
+            }
+            if(keys[GLFW_KEY_S]){
+                currentOrbital = Orbital_3s();
+                app.renderer.generateOrbital(currentOrbital);
+                keys[GLFW_KEY_S] = false;
+                displayed3s = true;
+                displayed3p = false;
+            }
         }
 
         app.update();
@@ -167,7 +303,7 @@ int main(){
         glfwPollEvents();
     }
 
-   
+
     glfwTerminate();
     return 0;
 }
