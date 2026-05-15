@@ -1,9 +1,7 @@
 #pragma once
-#include <cmath>
 
-#ifndef PI
-#define PI 3.14159265358979323846f
-#endif
+#include <cmath>
+#include "../maths/maths.h"
 
 struct Camera
 {
@@ -15,7 +13,7 @@ struct Camera
 
     Camera(float px, float py, float pz) : x(px), y(py), z(pz), pitch(0.0f), yaw(0.0f) {}
     
-    void getForward(float &fx, float &fy, float &fz){
+    void getForward(float &fx, float &fy, float &fz) const{
         float pitchRad = pitch*PI/180.0f;
         float yawRad = yaw*PI/180.0f;
         fx = cosf(pitchRad)*sinf(yawRad);

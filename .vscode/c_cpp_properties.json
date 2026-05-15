@@ -6,12 +6,12 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src/**",
                 "${workspaceFolder}/src/physics",
+                "${workspaceFolder}/src/camera",
                 "${workspaceFolder}/src/renderer",
                 "${workspaceFolder}/src/external/include",
                 "${workspaceFolder}/src/external/src",
                 "${workspaceFolder}/src/external/include/glad",
                 "${workspaceFolder}/src/stb",
-                "${workspaceFolder}/src/core",
                 "C:/msys64/ucrt64/include",
                 "${workspaceFolder}/src/external",
                 "${workspaceFolder}"

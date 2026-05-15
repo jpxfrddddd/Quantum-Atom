@@ -13,8 +13,8 @@
         "src/physics/orbital.cpp",
         "src/physics/atom.cpp",
         "src/physics/orb.cpp",
+        "src/camera/camera.cpp",
         "src/renderer/renderer.cpp",
-        "src/renderer/camera.cpp",
         "src/external/glad/src/glad.c",
 
         "-IC:/msys64/ucrt64/include",

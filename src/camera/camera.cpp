@@ -1,5 +1,6 @@
 #include <cmath>
 #include <cstring>
+
 #include "camera.h"
 
 void perspective(float *m, float fov, float aspect, float near, float far){

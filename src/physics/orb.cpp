@@ -116,3 +116,67 @@ orbitalGroup Orbital_3p_y(){
         }
     };
 }
+
+orbitalGroup Orbital_3d(){
+    return orbitalGroup{
+        "orbital_3d",
+        10,
+        std::vector<Orbital>{
+            {3,2,2,2,psi_3d_x2y2},
+            {3,2,1,2,psi_3d_xz},
+            {3,2,0,2,psi_3d_z2},
+            {3,2,-1,2,psi_3d_yz},
+            {3,2,-2,2,psi_3d_xy}
+        }
+    };
+}
+
+orbitalGroup Orbital_3d_x2y2(){
+    return orbitalGroup{
+        "orbital_3d_x2y2",
+        2,
+        std::vector<Orbital>{
+            {3,2,2,2,psi_3d_x2y2}
+        }
+    };
+}
+
+orbitalGroup Orbital_3d_xz(){
+    return orbitalGroup{
+        "orbital_3d_xz",
+        2,
+        std::vector<Orbital>{
+            {3,2,1,2,psi_3d_xz}
+        }
+    };
+}
+
+orbitalGroup Orbital_3d_z2(){
+    return orbitalGroup{
+        "orbital_3d_z2",
+        2,
+        std::vector<Orbital>{
+            {3,2,0,2,psi_3d_z2}
+        }
+    };
+}
+
+orbitalGroup Orbital_3d_yz(){
+    return orbitalGroup{
+        "orbital_3d_yz",
+        2,
+        std::vector<Orbital>{
+            {3,2,-1,2,psi_3d_yz}
+        }
+    };
+}
+
+orbitalGroup Orbital_3d_xy(){
+    return orbitalGroup{
+        "orbital_3d_xy",
+        2,
+        std::vector<Orbital>{
+            {3,2,-2,2,psi_3d_xy}
+        }
+    };
+}

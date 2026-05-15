@@ -16,7 +16,11 @@ Point cloud rendering
 
 Basic camera movement    
 
-Different orbitals (depending on implementation)    
+Different orbitals
+
+## Build
+
+The executable may be flagged by as a potentially dangerous app by SmartScreen owing to the lack of electronic signature and the low amount of downloads. You can run the app safely or build it yourself with: g++ -o QuantumAtom.exe -O3 -lglfw3 -lopengl32 -lgdi32 -lwinmm
 
 ## Controls
 
@@ -24,13 +28,11 @@ Different orbitals (depending on implementation)
 
 Pressing 1 will display 1s.
 
-Pressing 2 will display 2s. Once 2s is diplayed, pressing p will display 2p and once 2p is displayed, pressing x,z or y will display the following subshells. It applies to 3s and 3p.
+Pressing 2 will display 2s. Once 2s is diplayed, pressing p will display 2p and once 2p is displayed, pressing x,z or y will display the corresponding subshells. It applies to 3s and 3p.
 
 If 3s or 3p is displayed, use the left arrow in order to display 3d subshells (when they will be implemented).
 
-You can only move forward or back with the arrows, and move up or down with the space bar or left shift.
-
-Note that the currently displayed is chlorine due to his large amount of electron shells.
+Press esc to close the program.
 
 ## How it works
 
@@ -42,12 +44,15 @@ This project visualizes atomic orbitals using solution of the Schrödinger equat
 
 ### Schrödinger Equation
 
-The time-independent Schrödinger equation is:
+You may have already seen the Schrödinger equation:
 
-$$\Psi(r, \theta, \phi)$$ = solution of:
+$$i\hbar\frac{\partial\Psi(t,\vec{r})}{\partial t}=-\frac{\hbar^2}{2m}\Delta\Psi(t,\vec{r})+V(\vec{r})\Psi(t,\vec{r})$$
+
+In this program, the time-independent equation is used, we solve
+
 $$\hat{H}\Psi = E\Psi$$
 
-where $\hat{H}$ is the Hamiltonian operator and $\Psi$ is the wave function of the electron.
+For $\Psi(r, \theta, \phi)$ where $\hat{H}$ is the Hamiltonian operator, $E$ is the total energy of the system modelised by the Hamiltonian operator and $\Psi$ is the wave function of the electron.
 
 ### Hydrogen-like Atom
 
@@ -65,7 +70,7 @@ $$\Psi_{nlm}(r, \theta, \phi) = R_{nl}(r) \cdot Y_{lm}(\theta, \phi)$$
 
 where:
 
-$$R_{nl}(r)$$ is the radial part  
+$$R_{nl}(r)$$ is the radial part,
 $$Y_{lm}(\theta, \phi)$$ are the spherical harmonics.
 
 ### Probability Density  
@@ -80,13 +85,13 @@ This quantity is what is visualized in the program
 
 To represent this probability density:  
 
-    Points are randomly generated in 3d space  
+Points are randomly generated in 3d space  
 
-    The probability density $P$ is evalued at each point  
+The probability density $P$ is evalued at each point  
 
-    Points are accepted with a probability proportional to $P$  
+Points are accepted with a probability proportional to $P$  
 
-    The resulting point approximates the electron distribution  
+The resulting point approximates the electron distribution  
 
 ## Limitations
 
@@ -101,9 +106,11 @@ Basic rendering pipeline
 
 ## Future improvements
 
-Better rendering (shaders, lighting)  
+Better rendering (lighting)  
 
-Interactive atom & orbital selection  
+Interactive atom & orbital selection 
+
+Slice cut
 
 Performance improvements  
 

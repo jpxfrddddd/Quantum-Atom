@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../physics/atom.h"
 #include "../renderer/renderer.h"
 #include "../physics/orb.h"
@@ -11,7 +12,7 @@ public:
     Camera cam;
     Renderer renderer;
 
-    App(Atom atom, Camera cam, orbitalGroup generatedOrbital) : currentAtom(atom), cam(0.0f, 0.0f, 3.0f), currentOrbital(generatedOrbital) {}
+    App(Atom atom, Camera cam, orbitalGroup generatedOrbital) : currentAtom(atom), cam(0.0f, 0.0f, 0.0f), currentOrbital(generatedOrbital) {}
 
     void keyCallback();
     void mouseCallback();
